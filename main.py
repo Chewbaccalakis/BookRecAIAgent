@@ -29,7 +29,7 @@ logging.basicConfig(stream=sys.stderr)
 llama_index.core.set_global_handler("simple")
 
 try:
-    vector_store_books = MilvusVectorStore(dim=384, uri="milvus:19530", collection_name="books")
+    vector_store_books = MilvusVectorStore(dim=384, uri="http://milvusdb:19530", collection_name="books")
     storage_context = StorageContext.from_defaults(
         persist_dir="./storage/books",
         vector_store=vector_store_books,
@@ -38,7 +38,7 @@ try:
 except Exception as error:
     print(f'Unable to load index from storage: {error}')
     print('Indexing book dataset')
-    vector_store_books = MilvusVectorStore(dim=384, collection_name="books", uri="milvus:19530", overwrite=True)
+    vector_store_books = MilvusVectorStore(dim=384, collection_name="books", uri="http://milvusdb:19530", overwrite=True)
     book_docs = SimpleDirectoryReader(input_dir="./data").load_data()
     storage_context = StorageContext.from_defaults(
         vector_store=vector_store_books,

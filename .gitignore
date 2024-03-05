@@ -136,3 +136,6 @@ dmypy.json
 
 # Local vector DB
 storage/
+
+
+volumes/

@@ -8,3 +8,4 @@ pymilvus
 llama-index-embeddings-huggingface
 llama-index-embeddings-instructor
 python-dotenv
+gradio

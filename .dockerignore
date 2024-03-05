@@ -1,0 +1,8 @@
+*.MD
+example.env
+.venv/
+__pycache__/
+storage/
+.gitignore
+docker-compose.yml
+data/

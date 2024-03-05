@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  milvus:
+    container_name: milvus-standalone
+    security_opt:
+        - seccomp:unconfined
+    environment:
+        - ETCD_USE_EMBED=true
+        - ETCD_DATA_DIR=/var/lib/milvus/etcd
+        - ETCD_CONFIG_PATH=/milvus/configs/embedEtcd.yaml
+        - COMMON_STORAGETYPE=local
+    volumes:
+        - ./volumes/milvus:/var/lib/milvus
+        - ./embedEtcd.yaml:/milvus/configs/embedEtcd.yaml
+    ports:
+        - 19530:19530
+        - 9091:9091
+        - 2379:2379
+    healthcheck:
+        test: curl -f http://localhost:9091/healthz
+        interval: 30s
+        start_period: 90s
+        timeout: 20s
+        retries: 3
+    image: milvusdb/milvus:v2.3.9
+    command: milvus run standalone 1> /dev/null
+
+  bookrecagent:
+    image: chewbaccalakis/bookrecaiagent
+    volumes:
+      - ./data:/app/data
+      -  bookai:/app/storage/books
+    depends_on:
+      - milvus
+    networks:
+      - book-net
+    
+volumes:
+  bookai:
+
+networks:
+  book-net:
+    name: book-net

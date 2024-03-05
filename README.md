@@ -2,13 +2,21 @@
 
 This is an AI book recommender agent that helps booksellers recommend in-stock books.
 
-## Installing
+## Installing w/o Docker Compose
 
 You'll need [Milvus](https://milvus.io/) for the vector database.
 
 We recommend using Docker with Milvus:
 https://milvus.io/docs/install_standalone-docker.md
 https://hub.docker.com/
+
+## Using Docker Compose
+
+Start containers with the command "docker compose up" in the same directory as docker-compose.yml
+
+## OpenAI API Key
+
+Rename example.env to .env and replace with your OpenAI API key
 
 ## Helpful Links
 UI: https://www.gradio.app/
